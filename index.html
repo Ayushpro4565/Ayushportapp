@@ -15,12 +15,13 @@
 <div class="music-controller">
   <button id="music-toggle" class="pulse-ring">
     <span class="icon">🔊</span>
-    <span class="text">Music On</span>
+    <span class="text">Playing mytheme</span>
   </button>
 </div>
 
-<audio id="bg-music" autoplay loop>
-  <source src="ayush-theme.mp3" type="audio/mpeg">
+
+<audio id="bg-music" loop>
+  <source id="audio-source" src="mytheme.mp3" type="audio/mpeg" />
 </audio>
 
 
@@ -30,7 +31,11 @@
       <div class="logo">
         <img src="logo.png" alt="Ayush Logo" />
       </div>
-      <h1 class="gradient-name">Ayush's Portfolio</h1>
+      <div id="now-playing" style="font-weight: bold; font-size: 18px; color: #00ffcc; margin-bottom: 10px;">
+  🎶 Now Playing: mytheme.mp3
+</div>
+<h1 class="gradient-name">Ayush's Portfolio</h1>
+
       <div class="address-wrapper">
         <p id="typewriter-address"></p>
       </div>
@@ -175,11 +180,15 @@
 
 <script>
   const music = document.getElementById("bg-music");
+  const source = document.getElementById("audio-source");
   const toggleBtn = document.getElementById("music-toggle");
   const icon = toggleBtn.querySelector(".icon");
   const text = toggleBtn.querySelector(".text");
 
-  // Toast generator
+  let currentTrack = localStorage.getItem("track") || "mytheme"; // "mytheme" or "mytheme1"
+  let musicState = localStorage.getItem("music") || "on";
+
+  // Toast message function
   const showToast = (msg) => {
     const toast = document.createElement("div");
     toast.className = "music-toast";
@@ -192,35 +201,82 @@
     }, 2500);
   };
 
-  // Load state from localStorage
-  const savedState = localStorage.getItem("music") || "on";
-  if (savedState === "off") {
-    music.pause();
+  // Load selected track
+  function loadTrack(trackName) {
+    const fileName = trackName === "mytheme1" ? "mytheme1.mp3" : "mytheme.mp3";
+    source.src = fileName;
+    music.load();
+    if (musicState === "on") {
+      music.play();
+    }
+  }
+
+  // Initial load
+  loadTrack(currentTrack);
+  if (musicState === "off") {
     icon.textContent = "🔇";
     text.textContent = "Music Off";
     toggleBtn.classList.remove("pulse-ring");
+    music.pause();
   } else {
+    icon.textContent = "🔊";
+    text.textContent = `Playing ${currentTrack}`;
     toggleBtn.classList.add("pulse-ring");
   }
 
-  // Toggle logic
+  // Toggle button logic
   toggleBtn.addEventListener("click", () => {
     if (music.paused) {
       music.play();
-      icon.textContent = "🔊";
-      text.textContent = "Music On";
-      showToast("🔊 Music turned ON");
+      musicState = "on";
       localStorage.setItem("music", "on");
+      icon.textContent = "🔊";
+      text.textContent = `Playing ${currentTrack}`;
+      showToast(`🔊 Music ON: ${currentTrack}`);
       toggleBtn.classList.add("pulse-ring");
     } else {
-      music.pause();
-      icon.textContent = "🔇";
-      text.textContent = "Music Off";
-      showToast("🔇 Music turned OFF");
-      localStorage.setItem("music", "off");
-      toggleBtn.classList.remove("pulse-ring");
+      // Switch to other track
+      currentTrack = currentTrack === "mytheme" ? "mytheme1" : "mytheme";
+      localStorage.setItem("track", currentTrack);
+      loadTrack(currentTrack);
+      icon.textContent = "🔊";
+      text.textContent = `Playing ${currentTrack}`;
+      showToast(`🎵 Switched to ${currentTrack}.mp3`);
     }
   });
+
+  // Ensure autoplay works after first click on mobile
+  window.addEventListener("click", () => {
+    if (musicState !== "off" && music.paused) {
+      music.play().catch(() => {});
+    }
+  }, { once: true });
+</script>
+
+
+<script>
+  const music = document.getElementById("bg-music");
+  const source = document.getElementById("audio-source");
+  const toggleBtn = document.getElementById("music-toggle");
+  const icon = toggleBtn.querySelector(".icon");
+  const text = toggleBtn.querySelector(".text");
+  const nowPlayingText = document.getElementById("now-playing");
+
+  let currentTrack = "mytheme"; // Default
+
+  function switchTrack() {
+    currentTrack = currentTrack === "mytheme" ? "mytheme1" : "mytheme";
+    source.src = currentTrack + ".mp3";
+    music.load();
+    music.play();
+
+    // Update button and now-playing text
+    icon.textContent = "🎵";
+    text.textContent = "Playing " + currentTrack;
+    nowPlayingText.textContent = "🎶 Now Playing: " + currentTrack + ".mp3";
+  }
+
+  toggleBtn.addEventListener("click", switchTrack);
 </script>
 
 
