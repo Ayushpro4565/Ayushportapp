@@ -1,0 +1,391 @@
+/* Global Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+main.card {
+  max-width: 900px;
+  margin: auto;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+/* Logo */
+.logo img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 4px solid #00ffcc;
+  box-shadow: 0 0 15px rgba(0, 255, 204, 0.6);
+}
+
+/* Gradient Text */
+.gradient-name {
+  font-size: 2.5rem;
+  margin-top: 15px;
+  background: linear-gradient(90deg, #00e5ff, #00ff99);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Address Typewriter */
+#typewriter-address {
+  font-size: 1rem;
+  padding: 10px;    
+  color: #eee;
+  margin-top: 10px;
+}
+
+/* Buttons Section */
+.buttons {
+  margin: 25px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.buttons a {
+  padding: 10px 20px;
+  background: #00ffcc;
+  color: #000;
+  font-weight: bold;
+  border-radius: 30px;
+  transition: transform 0.3s, background 0.3s;
+  box-shadow: 0 0 12px rgba(0, 255, 204, 0.3);
+}
+
+.buttons a:hover {
+  transform: scale(1.05);
+  background: #00e6b8;
+}
+
+/* Social Icons */
+.social-icons {
+  margin: 20px 0;
+}
+
+.social-icons img {
+  width: 40px;
+  margin: 0 10px;
+  transition: transform 0.2s;
+}
+
+.social-icons img:hover {
+  transform: scale(1.2);
+}
+
+/* About Card Flip */
+.about-card {
+  perspective: 1000px;
+  width: 100%;
+  max-width: 400px;
+  margin: 30px auto;
+}
+
+.about-inner {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  transform-style: preserve-3d;
+  transition: transform 0.8s;
+}
+
+.about-card.flip .about-inner {
+  transform: rotateY(180deg);
+}
+
+.about-front,
+.about-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  box-shadow: 0 0 15px rgba(0, 255, 204, 0.1);
+}
+
+.about-back {
+  transform: rotateY(180deg);
+}
+
+/* Project Section */
+.projects {
+  margin-top: 40px;
+}
+
+.projects h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.project-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.project-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 10px;
+  width: 250px;
+  box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+  transition: transform 0.3s;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Skills Section */
+.skills {
+  margin-top: 40px;
+}
+
+.skills h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.skill {
+  margin-bottom: 15px;
+}
+
+.skill span {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.bar {
+  background: #222;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.fill {
+  height: 10px;
+  background: #00ffcc;
+  border-radius: 20px;
+}
+
+/* Install Button */
+#installBtn {
+  background: #00ffcc;
+  color: #000;
+  font-weight: bold;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
+  transition: background 0.3s ease;
+}
+
+#installBtn:hover {
+  background: #00e6b8;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .project-card {
+    width: 90%;
+  }
+
+  .logo img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .gradient-name {
+    font-size: 1.8rem;
+  }
+}
+
+#particles-js {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.music-controller {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+}
+
+#music-toggle {
+  background: #00ffcc;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-weight: bold;
+  color: #000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(0, 255, 204, 0.4);
+  transition: background 0.3s ease, transform 0.2s;
+  cursor: pointer;
+}
+
+#music-toggle:hover {
+  background: #00e6b8;
+  transform: scale(1.05);
+}
+
+#music-toggle .icon {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+.music-toast {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  background: #00ffcc;
+  color: #000;
+  padding: 12px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(0, 255, 204, 0.4);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+  z-index: 9999;
+}
+
+.music-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Music Controller Button */
+.music-controller {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+}
+
+#music-toggle {
+  background: #00ffcc;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 20px;
+  font-weight: bold;
+  color: #000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 15px rgba(0, 255, 204, 0.5);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Pulse ring effect */
+#music-toggle.pulse-ring::before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  border-radius: 50%;
+  background: rgba(0, 255, 204, 0.3);
+  animation: pulse 1.8s infinite ease-in-out;
+  z-index: -1;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+}
+
+/* Toast Styles */
+.music-toast {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  background: #00ffcc;
+  color: #000;
+  padding: 12px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(0, 255, 204, 0.4);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+  z-index: 9999;
+}
+
+.music-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tilt-card {
+  perspective: 1000px;
+}
+
+.tilt-card:hover {
+  transform: rotateY(0deg);
+}
+
+.tilt-card-inner {
+  transition: transform 0.2s ease;
+  will-change: transform;
+}
+
+/* 3D Tilt Card Styles */
+.tilt-card {
+  perspective: 1000px;
+  transition: transform 0.2s ease;
+  will-change: transform;
+}
+
+.tilt-card:hover {
+  transition: none;
+}
+
+.tilt-card-inner {
+  transform-style: preserve-3d;
+}

@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ayush's Portfolio App</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#0f2027" />
+</head>
+<body>
+
+  <main class="card">
+    <header>
+      <div class="logo">
+        <img src="logo.png" alt="Ayush Logo" />
+      </div>
+      <h1 class="gradient-name">Ayush's Portfolio</h1>
+      <div class="address-wrapper">
+        <p id="typewriter-address"></p>
+      </div>
+    </header>
+
+    <section class="buttons">
+      <a href="https://www.google.com/" target="_blank">🌟 Google Review</a>
+      <a href="tel:+919873647303">📞 Call Now</a>
+      <a href="https://wa.me/919873647303?text=Hey%20Ayush%2C%20I%20want%20to%20connect%20with%20you%20via%20WhatsApp" target="_blank">💬 WhatsApp</a>
+      <a href="vcard.vcf" download>💾 Add Contact</a>
+      <a href="justdial.html" target="_blank" class="justdial">🧭 JustDial</a>
+    </section>
+
+    <section class="social-icons">
+      <a href="https://wa.me/919873647303?text=Hey%20Ayush%2C%20I%20want%20to%20connect%20with%20you%20via%20WhatsApp" target="_blank">
+        <img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" alt="WhatsApp" />
+      </a>
+      <a href="https://www.instagram.com/ayuu_shhh_._/" target="_blank">
+        <img src="https://img.icons8.com/fluency/48/000000/instagram-new.png" alt="Instagram" />
+      </a>
+      <a href="https://www.google.com/" target="_blank">
+        <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google" />
+      </a>
+    </section>
+
+    <section class="about-card">
+      <div class="about-inner">
+        <div class="about-front">
+          <h2>About Me</h2>
+          <p>Tap to read</p>
+        </div>
+        <div class="about-back">
+          <h3>Hi, I'm Ayush 👋</h3>
+          <p>I design responsive websites that are modern, smooth, and mobile-ready for businesses and personal brands.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="projects">
+      <h2>📂 My Projects</h2>
+      <div class="project-grid">
+        <div class="project-card">
+          <h3>Portfolio Website</h3>
+          <p>My personal portfolio with responsive design and animations.</p>
+        </div>
+        <div class="project-card">
+          <h3>Business Landing Page</h3>
+          <p>A one-page product site built for a local startup.</p>
+        </div>
+        <div class="project-card">
+          <h3>Blog UI Clone</h3>
+          <p>Frontend clone of a blogging platform with full responsiveness.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="skills">
+      <h2>🎯 My Skills</h2>
+      <div class="skill">
+        <span>HTML</span>
+        <div class="bar"><div class="fill" style="width: 95%"></div></div>
+      </div>
+      <div class="skill">
+        <span>CSS</span>
+        <div class="bar"><div class="fill" style="width: 90%"></div></div>
+      </div>
+      <div class="skill">
+        <span>JavaScript</span>
+        <div class="bar"><div class="fill" style="width: 80%"></div></div>
+      </div>
+      <div class="skill">
+        <span>Responsive Design</span>
+        <div class="bar"><div class="fill" style="width: 85%"></div></div>
+      </div>
+    </section>
+
+    <button id="installBtn" style="display:none; margin-top: 30px; padding: 12px 24px; font-weight: bold; border-radius: 8px; background: #00ffcc; color: #000;">📲 Install This App</button>
+  </main>
+
+  <script>
+    const card = document.querySelector('.about-card');
+    card.addEventListener('click', () => {
+      card.classList.toggle('flip');
+    });
+
+    const addressElement = document.getElementById("typewriter-address");
+    const addressText = "F3/288, Neem Chowk, Sangam Vihar, New Delhi - 110080";
+    let i = 0;
+    function typeAddress() {
+      if (i < addressText.length) {
+        addressElement.textContent += addressText.charAt(i);
+        i++;
+        setTimeout(typeAddress, 50);
+      }
+    }
+    typeAddress();
+
+    // PWA Install Button
+    let deferredPrompt;
+    const installBtn = document.getElementById('installBtn');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = 'inline-block';
+    });
+
+    installBtn.addEventListener('click', () => {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('App installed');
+        }
+        deferredPrompt = null;
+      });
+    });
+  </script>
+
+</body>
+</html>
